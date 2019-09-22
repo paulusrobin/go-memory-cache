@@ -6,8 +6,8 @@
 ``` 
 
 #### Example
-```
-cache, err = memory_cache.New()
+```go
+cache, err := memory_cache.New()
 if err != nil {
     log.Error(err)
     panic(err)
@@ -38,8 +38,8 @@ OnRemoveWithReason func(key string, reason string)
 ```
 
 #### Example using Option
-```
-cache, err = memory_cache.NewWithOption(memory_cache.Option{
+```go
+cache, err := memory_cache.NewWithOption(memory_cache.Option{
     MaxEntrySize:       1024,
     MaxEntriesKey:      100,
     MaxEntriesInWindow: 1024 * 1024,

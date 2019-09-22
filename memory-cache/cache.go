@@ -6,8 +6,8 @@ import (
 	"time"
 )
 
-var Infinite = math.MaxInt32
-var Forever = 87660 * time.Hour
+const Infinite = math.MaxInt32
+const Forever = 87660 * time.Hour
 
 type (
 	Option struct {

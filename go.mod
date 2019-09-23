@@ -1,4 +1,4 @@
-module github.com/tiketrobin/Go-Memory-Cache
+module github.com/tiketrobin/go-memory-cache
 
 go 1.12
 

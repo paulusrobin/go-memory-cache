@@ -1,4 +1,4 @@
-# Go-Memory-Cache
+# go-memory-cache
 
 ### Installation
 ```

@@ -2,8 +2,8 @@ package memory_cache
 
 import (
 	"fmt"
+	"github.com/paulusrobin/go-memory-cache/logs"
 	"github.com/pkg/errors"
-	"github.com/paulusrobin/Go-Memory-Cache/logs"
 	"reflect"
 	"sync"
 	"time"
@@ -32,7 +32,7 @@ func (c *cache) Set(key string, value interface{}, ttl time.Duration) error {
 	}
 
 	for {
-		if c.size + newItemSize > uintptr(c.option.MaxEntriesInWindow) {
+		if c.size+newItemSize > uintptr(c.option.MaxEntriesInWindow) {
 			c.forceRemove(c.queue[0], windowsTooLarge)
 		} else {
 			break

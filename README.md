@@ -2,7 +2,7 @@
 
 ### Installation
 ```
-~ $ go get -u github.com/tiketrobin/go-memory-cache
+~ $ go get -u github.com/paulusrobin/go-memory-cache
 ``` 
 
 #### Example

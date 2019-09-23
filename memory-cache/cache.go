@@ -1,7 +1,7 @@
 package memory_cache
 
 import (
-	"github.com/tiketrobin/Go-Memory-Cache/logs"
+	"github.com/paulusrobin/Go-Memory-Cache/logs"
 	"math"
 	"time"
 )

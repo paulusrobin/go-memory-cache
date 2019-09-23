@@ -3,7 +3,7 @@ package memory_cache
 import (
 	"fmt"
 	"github.com/pkg/errors"
-	"github.com/tiketrobin/Go-Memory-Cache/logs"
+	"github.com/paulusrobin/Go-Memory-Cache/logs"
 	"reflect"
 	"sync"
 	"time"

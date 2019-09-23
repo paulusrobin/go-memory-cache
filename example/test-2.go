@@ -2,7 +2,7 @@ package example
 
 import (
 	"fmt"
-	"github.com/tiketrobin/Go-Memory-Cache/memory-cache"
+	"github.com/paulusrobin/go-memory-cache/memory-cache"
 	"sync"
 	"time"
 )

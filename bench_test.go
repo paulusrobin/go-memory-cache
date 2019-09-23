@@ -2,7 +2,7 @@ package main
 
 import (
 	"fmt"
-	"github.com/tiketrobin/Go-Memory-Cache/memory-cache"
+	"github.com/paulusrobin/Go-Memory-Cache/memory-cache"
 	"testing"
 )
 

@@ -12,11 +12,20 @@ type (
 	Logger interface {
 		Info(...interface{})
 		Infof(string, ...interface{})
+		Debug(...interface{})
+		Debugf(string, ...interface{})
 		Error(...interface{})
 		Errorf(string, ...interface{})
+		Warning(...interface{})
+		Warningf(string, ...interface{})
+		Fatal(...interface{})
+		Fatalf(string, ...interface{})
+		Print(...interface{})
+		Printf(string, ...interface{})
+		Instance() interface{}
 	}
 
-	Level string
+	Level     string
 	Formatter string
 
 	Option struct {
@@ -47,12 +56,48 @@ func (l *logger) Infof(format string, args ...interface{}) {
 	l.instance.Infof(format, args...)
 }
 
+func (l *logger) Debug(args ...interface{}) {
+	l.instance.Debug(args...)
+}
+
+func (l *logger) Debugf(format string, args ...interface{}) {
+	l.instance.Debugf(format, args...)
+}
+
 func (l *logger) Error(args ...interface{}) {
 	l.instance.Error(args...)
 }
 
 func (l *logger) Errorf(format string, args ...interface{}) {
 	l.instance.Errorf(format, args...)
+}
+
+func (l *logger) Warning(args ...interface{}) {
+	l.instance.Warning(args...)
+}
+
+func (l *logger) Warningf(format string, args ...interface{}) {
+	l.instance.Warningf(format, args...)
+}
+
+func (l *logger) Fatal(args ...interface{}) {
+	l.instance.Fatal(args...)
+}
+
+func (l *logger) Fatalf(format string, args ...interface{}) {
+	l.instance.Fatalf(format, args...)
+}
+
+func (l *logger) Print(args ...interface{}) {
+	l.instance.Print(args...)
+}
+
+func (l *logger) Printf(format string, args ...interface{}) {
+	l.instance.Printf(format, args...)
+}
+
+func (l *logger) Instance() interface{} {
+	return l.instance
 }
 
 func New(option *Option) (Logger, error) {

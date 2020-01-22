@@ -2,6 +2,7 @@ package memory_cache
 
 import (
 	"fmt"
+	sigar "github.com/cloudfoundry/gosigar"
 	"github.com/paulusrobin/go-memory-cache/logs"
 	"github.com/pkg/errors"
 	"reflect"
@@ -12,6 +13,7 @@ import (
 var tooManyKeysInvoked = "Too many keys invoked"
 var windowsTooLarge = "Windows too large"
 var valueTooLarge = "Entry value too large"
+var memoryExceed = "Memory exceed"
 
 type cache struct {
 	option Option
@@ -121,4 +123,30 @@ func (c *cache) removeQueue() {
 
 func (c *cache) getSize(T interface{}) uintptr {
 	return reflect.TypeOf(T).Size()
+}
+
+func (c *cache) GC(duration time.Duration, done <-chan bool) {
+	tick := time.Tick(duration)
+	for {
+		select {
+		case <-tick:
+			mem := sigar.Mem{}
+
+			if err := mem.Get(); err != nil {
+				c.log.Errorf("error get memory = ", err.Error())
+				break
+			}
+
+			percentageUsed := float64(mem.ActualUsed) / float64(mem.Total) * 100
+			if percentageUsed > c.option.MaxPercentageMemory {
+				if c.option.OnMemoryExceed != nil {
+					c.option.OnMemoryExceed(percentageUsed, c.option.MaxPercentageMemory, float64(mem.ActualUsed))
+				}
+				c.forceRemove(c.queue[0], memoryExceed)
+			}
+
+		case <-done:
+			return
+		}
+	}
 }

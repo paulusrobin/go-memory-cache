@@ -26,7 +26,7 @@ type (
 		Truncate() error
 		Len() int
 		Size() uintptr
-		GC(time.Duration, <-chan bool)
+		Cleaner(time.Duration, <-chan bool)
 	}
 )
 

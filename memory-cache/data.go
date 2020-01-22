@@ -125,7 +125,7 @@ func (c *cache) getSize(T interface{}) uintptr {
 	return reflect.TypeOf(T).Size()
 }
 
-func (c *cache) GC(duration time.Duration, done <-chan bool) {
+func (c *cache) Cleaner(duration time.Duration, done <-chan bool) {
 	tick := time.Tick(duration)
 	for {
 		select {

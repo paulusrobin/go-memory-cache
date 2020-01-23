@@ -102,6 +102,10 @@ func (c *cache) Size() uintptr {
 }
 
 func (c *cache) forceRemove(key string, reason string) {
+	if _, ok := c.data[key]; !ok {
+		return
+	}
+
 	delete(c.data, key)
 	c.removeQueue()
 
@@ -142,9 +146,8 @@ func (c *cache) Cleaner(duration time.Duration, done <-chan bool) {
 				if c.option.OnMemoryExceed != nil {
 					c.option.OnMemoryExceed(percentageUsed, c.option.MaxPercentageMemory, float64(mem.ActualUsed))
 				}
-				if len(c.queue) > 0 {
-					c.forceRemove(c.queue[0], memoryExceed)
-				}
+				c.forceRemove(c.queue[0], memoryExceed)
+
 			}
 
 		case <-done:

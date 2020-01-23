@@ -142,7 +142,9 @@ func (c *cache) Cleaner(duration time.Duration, done <-chan bool) {
 				if c.option.OnMemoryExceed != nil {
 					c.option.OnMemoryExceed(percentageUsed, c.option.MaxPercentageMemory, float64(mem.ActualUsed))
 				}
-				c.forceRemove(c.queue[0], memoryExceed)
+				if len(c.queue) > 0 {
+					c.forceRemove(c.queue[0], memoryExceed)
+				}
 			}
 
 		case <-done:

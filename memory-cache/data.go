@@ -143,7 +143,7 @@ func (c *cache) Cleaner(duration time.Duration, done <-chan bool) {
 					c.option.OnMemoryExceed(percentageUsed, c.option.MaxPercentageMemory, float64(mem.ActualUsed))
 				}
 				if len(c.queue) > 0 {
-					c.forceRemove(c.queue[0], memoryExceed)
+					_ = c.Truncate()
 				}
 			}
 

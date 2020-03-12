@@ -29,17 +29,7 @@ func (c *cache) Set(key string, value interface{}, ttl time.Duration) error {
 	defer c.mu.Unlock()
 
 	newItemSize := c.getSize(value)
-	if newItemSize > uintptr(c.option.MaxEntrySize) {
-		return errors.New(valueTooLarge)
-	}
 
-	for {
-		if c.size+newItemSize > uintptr(c.option.MaxEntriesInWindow) {
-			c.forceRemove(c.queue[0], windowsTooLarge)
-		} else {
-			break
-		}
-	}
 	if len(c.data) >= c.option.MaxEntriesKey {
 		c.forceRemove(c.queue[0], tooManyKeysInvoked)
 	}

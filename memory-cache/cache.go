@@ -27,6 +27,7 @@ type (
 		Len() int
 		Size() uintptr
 		Cleaner(time.Duration, <-chan bool)
+		Keys() []string
 	}
 )
 

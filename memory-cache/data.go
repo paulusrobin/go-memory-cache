@@ -152,3 +152,7 @@ func (c *cache) Cleaner(duration time.Duration, done <-chan bool) {
 		}
 	}
 }
+
+func (c *cache) Keys() []string {
+	return c.queue
+}
